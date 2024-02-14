@@ -1,4 +1,4 @@
-// access the data store (fixtures/store.json)
+// access the data store (store.json)
 import fs from "fs";
 import path from "path";
 
@@ -7,11 +7,11 @@ import { ServerResponse, IncomingMessage } from "http";
 
 // access the task structure
 import { Task } from "./ITask";
-const jsonPath = path.join(__dirname, "../fixtures/store.json");
+const jsonPath = path.join(__dirname, "./store.json");
 
 const getTasks = (req: IncomingMessage, res: ServerResponse) => {
     return fs.readFile(jsonPath, "utf8", (err, data) => {
-        // Read the fixtures/store.json file
+        // Read the store.json file
         // Check out any errors
         if (err) {
             // error, send an error message
@@ -47,7 +47,7 @@ const addTask = (req: IncomingMessage, res: ServerResponse) => {
     req.on("end", () => {
         let task = JSON.parse(data);
 
-        // Read the fixtures/store.json file
+        // Read the store.json file
         fs.readFile(jsonPath, "utf8", (err, data) => {
             // Check out any errors
             if (err) {
@@ -71,7 +71,7 @@ const addTask = (req: IncomingMessage, res: ServerResponse) => {
                 task.id = latest_id + 1;
                 // add the new task to the tasks array
                 tasks.push(task);
-                // write the new tasks array to the fixtures/store.json file
+                // write the new tasks array to the store.json file
                 fs.writeFile(jsonPath, JSON.stringify(tasks, null, 2), (err) => {
                     // Check out any errors
                     if (err) {
@@ -120,7 +120,7 @@ const updateTask = (req: IncomingMessage, res: ServerResponse) => {
             );
             return;
         }
-        // Read the fixtures/store.json file
+        // Read the store.json file
         fs.readFile(jsonPath, "utf8", (err, data) => {
             // Check out any errors
             if (err) {
@@ -143,7 +143,7 @@ const updateTask = (req: IncomingMessage, res: ServerResponse) => {
                     // replace the task with the new one
                     tasks[index] = taskToBeUpdated;
                 }
-                // write the new tasks array to the fixtures/store.json file
+                // write the new tasks array to the store.json file
                 fs.writeFile(jsonPath, JSON.stringify(tasks, null, 2), (err) => {
                     // Check out any errors
                     if (err) {
@@ -191,7 +191,7 @@ const deleteTask = (req: IncomingMessage, res: ServerResponse) => {
             );
             return;
         }
-        // Read the fixtures/store.json file
+        // Read the store.json file
         fs.readFile(jsonPath, "utf8", (err, data) => {
             // Check out any errors
             if (err) {
@@ -221,7 +221,7 @@ const deleteTask = (req: IncomingMessage, res: ServerResponse) => {
 
                 // remove the task
                 tasks.splice(index, 1);
-                // write the new tasks array to the fixtures/store.json file
+                // write the new tasks array to the store.json file
                 fs.writeFile(jsonPath, JSON.stringify(tasks, null, 2), (err) => {
                     // Check out any errors
                     if (err) {

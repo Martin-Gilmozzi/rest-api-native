@@ -1,0 +1,40 @@
+### Get all tasks
+GET http://localhost:3000/api/tasks
+
+### Create a new task
+POST http://localhost:3000/api/tasks
+content-type: application/json
+
+{
+  "title": "New Task",
+  "completed": false
+}
+
+### Upsert a new task with no id
+PUT http://localhost:3000/api/tasks
+content-type: application/json
+
+{
+  "title": "New Task updated",
+  "completed": false,
+  "description": "There is no description"
+}
+
+### Upsert a new task
+PUT http://localhost:3000/api/tasks
+content-type: application/json
+
+{
+  "id" : 5,
+  "title": "New Task updated",
+  "completed": false,
+  "description": "There is no description"
+}
+
+### Delete a task
+DELETE http://localhost:3000/api/tasks
+content-type: application/json
+
+{
+  "id" : 5
+}
